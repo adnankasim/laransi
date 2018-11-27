@@ -13,7 +13,7 @@
 				    
                         <h4 class="pull-left">Nama Akun : <strong>{{ $akun->nama_akun }}</strong> </h4>
                         <h4 class="pull-right">Kode Akun : <strong>{{ $akun->kode_akun }}</strong> </h4>
-                        <h4 class="text-center">Waktu : <strong>{{ $periode }}</strong> </h4>
+                        <h4 class="text-center">Periode : <strong>{{ $periode }}</strong> </h4>
                         <table class="table table-striped text-center">
                           <tr>
                             <th class="text-center" colspan="3">Transaksi</th>
@@ -58,13 +58,31 @@
                         <tr>
                             <th colspan="3" class="text-center">Saldo</th>
                             <th colspan="2" class="text-center">
-                            @if( substr($akun->kode_akun, 0, 1) === '1' ||  substr($akun->kode_akun, 0, 1) === '4')
+                            @if( substr($akun->kode_akun, 0, 1) === '1' ||  substr($akun->kode_akun, 0, 1) === '4' )
+                            
                             Rp. {{ number_format($total_debet - $total_kredit, 0, ',', '.') }},-
-                            @elseif( substr($akun->kode_akun, 0, 1) === '2' ||  substr($akun->kode_akun, 0, 1) === '3' || substr($akun->kode_akun, 0, 1) === '5')
+                            
+                            @elseif( substr($akun->kode_akun, 0, 1) === '2' ||  substr($akun->kode_akun, 0, 1) === '3' || substr($akun->kode_akun, 0, 1) === '5' )
+                            
                             Rp. {{ number_format($total_kredit - $total_debet, 0, ',', '.') }},-
+                            
                             @endif
                             </th>
                         </tr>
+
+                        <tr>
+                            <th colspan="3" class="text-center">Terbilang</th>
+                            <th colspan="2" class="text-center">
+                            <em>
+                            @if( substr($akun->kode_akun, 0, 1) === '1' ||  substr($akun->kode_akun, 0, 1) === '4')
+                            {{ ucwords(terbilang($total_debet - $total_kredit)) }} Rupiah
+                            @elseif( substr($akun->kode_akun, 0, 1) === '2' ||  substr($akun->kode_akun, 0, 1) === '3' || substr($akun->kode_akun, 0, 1) === '5')
+                             {{ ucwords(terbilang($total_kredit - $total_debet)) }} Rupiah 
+                            @endif
+                            </em>
+                            </th>
+                        </tr>
+
                     </table>
 
 					</div>

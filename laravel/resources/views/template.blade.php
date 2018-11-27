@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>LARANSI - SISTEM INFORMASI AKUNTANSI</title>
+	<title>LARANSI - SISTEM INFORMASI AKUNTANSI BERBASIS LARAVEL</title>
 	<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
@@ -18,12 +18,12 @@
 	<div class="jumbotron text-center" id="headerApps">
         <div>
 	        <h1> <strong>LARANSI</strong> </h1>
-	        <h4>SISTEM INFORMASI AKUNTANSI</h4>
+	        <h4>SISTEM INFORMASI AKUNTANSI BERBASIS LARAVEL</h4>
 	    </div>
 	</div>
 
     <nav class="navbar navbar-default">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu"><span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -35,39 +35,53 @@
 <?php
     if(Request::segment(1) === '') $halaman = '';
     if(Request::segment(1) === 'akun') $halaman = 'akun';
+    if(Request::segment(1) === 'profil') $halaman = 'profil';
     if(Request::segment(1) === 'jurnal-umum') $halaman = 'jurnal-umum';
     if(Request::segment(1) === 'buku-besar') $halaman = 'buku-besar';
     if(Request::segment(1) === 'neraca-saldo') $halaman = 'neraca-saldo';
+    if(Request::segment(1) === 'laporan') $halaman = 'laporan';
 ?>
             <ul class="nav nav-tabs nav-justified">
 @if(empty($halaman))
-              <li class="active"><a href="{{ url('/') }}"> <span class="fa fa-dashboard fa-lg"></span> BERANDA</a></li>
+              <li class="active"><a href="{{ url('/') }}"> <span class="fa fa-dashboard"></span> BERANDA</a></li>
 @else
-            <li><a href="{{ url('/') }}"> <span class="fa fa-dashboard fa-lg"></span> BERANDA</a></li>
+            <li><a href="{{ url('/') }}"> <span class="fa fa-dashboard"></span> BERANDA</a></li>
 @endif
               
-@if(!empty($halaman) && $halaman == 'akun')
-            <li class="active"><a href="{{ url('akun') }}"> <span class="fa fa-database fa-lg"></span> AKUN</a></li>
+@if(!empty($halaman) && $halaman == 'profil')
+            <li class="active"><a href="{{ url('profil') }}"> <span class="fa fa-university"></span> PROFIL</a></li>
 @else
-            <li><a href="{{ url('akun') }}"> <span class="fa fa-database fa-lg"></span> AKUN</a></li>
+            <li><a href="{{ url('profil') }}"> <span class="fa fa-university"></span> PROFIL</a></li>
+@endif
+
+@if(!empty($halaman) && $halaman == 'akun')
+            <li class="active"><a href="{{ url('akun') }}"> <span class="fa fa-address-book"></span> AKUN</a></li>
+@else
+            <li><a href="{{ url('akun') }}"> <span class="fa fa-address-book"></span> AKUN</a></li>
 @endif
               
 @if(!empty($halaman) && $halaman == 'jurnal-umum')
-            <li class="active"><a href="{{ url('jurnal-umum') }}"> <span class="fa fa-gears fa-lg"></span> JURNAL UMUM</a></li>
+            <li class="active"><a href="{{ url('jurnal-umum') }}"> <span class="fa fa-balance-scale"></span> JURNAL UMUM</a></li>
 @else
-            <li><a href="{{ url('jurnal-umum') }}"> <span class="fa fa-gears fa-lg"></span> JURNAL UMUM</a></li>
+            <li><a href="{{ url('jurnal-umum') }}"> <span class="fa fa-balance-scale"></span> JURNAL UMUM</a></li>
 @endif
               
 @if(!empty($halaman) && $halaman == 'buku-besar')
-              <li class="active"> <a href="{{ url('buku-besar') }}"> <span class="fa fa-file-pdf-o fa-lg"></span> BUKU BESAR</a> </li>
+              <li class="active"> <a href="{{ url('buku-besar') }}"> <span class="fa fa-book"></span> BUKU BESAR</a> </li>
 @else
-              <li> <a href="{{ url('buku-besar') }}"> <span class="fa fa-file-pdf-o fa-lg"></span> BUKU BESAR</a> </li>
+              <li> <a href="{{ url('buku-besar') }}"> <span class="fa fa-book"></span> BUKU BESAR</a> </li>
 @endif
 
 @if(!empty($halaman) && $halaman == 'neraca-saldo')
-              <li class="active"> <a href="{{ url('neraca-saldo') }}"> <span class="fa fa-sign-out fa-lg"></span> NERACA SALDO</a> </li>
+              <li class="active"> <a href="{{ url('neraca-saldo') }}"> <span class="fa fa-money"></span> NERACA SALDO</a> </li>
 @else
-              <li> <a href="{{ url('neraca-saldo') }}"> <span class="fa fa-sign-out fa-lg"></span> NERACA SALDO</a> </li>
+              <li> <a href="{{ url('neraca-saldo') }}"> <span class="fa fa-money"></span> NERACA SALDO</a> </li>
+@endif
+
+@if(!empty($halaman) && $halaman == 'laporan')
+              <li class="active"> <a href="{{ url('laporan') }}"> <span class="fa fa-file-pdf-o"></span> LAPORAN</a> </li>
+@else
+              <li> <a href="{{ url('laporan') }}"> <span class="fa fa-file-pdf-o"></span> LAPORAN</a> </li>
 @endif
             
             </ul>

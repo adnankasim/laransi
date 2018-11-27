@@ -65,6 +65,13 @@
                             </th>
                             @endif
                         </tr>
+
+                        <tr>
+                            <th colspan="3" class="text-center">TERBILANG</th>
+                            <th class="text-center"> <em> {{ ucwords(terbilang($total_debet)) }} Rupiah</em></th>
+                            <th class="text-center"> <em> {{ ucwords(terbilang($total_kredit)) }} Rupiah</em></th>
+                        </tr>
+
                     </table>
 
 					</div>

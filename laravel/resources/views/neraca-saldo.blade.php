@@ -48,7 +48,9 @@
                               <a href="{{ url('neraca-saldo/detail/'.date('Y-m-d', strtotime('1-'.$data->waktu))) }}" class="btn btn-info">
                                 Detail
                               </a>
-                            </td>
+                              <a href="{{ url('cetak-neraca/'.date('Y-m-d', strtotime('1-'.$data->waktu))) }}" class="btn btn-warning">
+                                Cetak
+                              </a>
                           </tr>
                         @endforeach
                     </table>

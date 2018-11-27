@@ -35,6 +35,13 @@
                           <th class="text-center">Rp. {{ number_format($total_saldo_debet, 0, ',', '.') }},-</th>
                           <th class="text-center">Rp. {{ number_format($total_saldo_kredit, 0, ',', '.') }},-</th>
                         </tr>
+
+                        <tr>
+                          <th colspan="2" class="text-center">TERBILANG</th>
+                          <th class="text-center"> <em> {{ ucwords(terbilang($total_saldo_debet)) }} Rupiah</em> </th>
+                          <th class="text-center"> <em> {{ ucwords(terbilang($total_saldo_kredit)) }} Rupiah</em></th>
+                        </tr>
+
                     </table>
 
 					</div>

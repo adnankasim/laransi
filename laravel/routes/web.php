@@ -24,3 +24,13 @@ Route::get('buku-besar/{id}/{waktu}', 'LaransiController@detailBukuBesar');
 Route::get('neraca-saldo', 'LaransiController@showNeracaSaldo');
 Route::get('neraca-saldo/cari', 'LaransiController@cariNeracaSaldo');
 Route::get('neraca-saldo/detail/{waktu}', 'LaransiController@detailNeracaSaldo');
+
+// profil
+Route::resource('profil', 'ProfilController');
+
+Route::get('laporan', 'LaransiController@showLaporan');
+Route::get('laporan/cetak/{waktu}', 'LaransiController@cetakLaporan');
+
+Route::get('tes', 'LaransiController@tes');
+
+Route::get('cetak-neraca/{waktu}', 'LaransiController@cetakNeracaSaldo');
