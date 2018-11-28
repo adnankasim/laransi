@@ -11,6 +11,8 @@ Route::get('jurnal-umum', 'LaransiController@showJurnalUmum');
 Route::get('jurnal-umum/create', 'LaransiController@formJurnalUmum');
 Route::get('jurnal-umum/detail/{waktu}', 'LaransiController@detailJurnalUmum');
 Route::post('jurnal-umum', 'LaransiController@storeJurnalUmum');
+Route::get('jurnal-umum/{id}/edit', 'LaransiController@editJurnalUmum');
+Route::patch('jurnal-umum/{id}', 'LaransiController@updateJurnalUmum');
 Route::delete('jurnal-umum/{id}', 'LaransiController@destroyJurnalUmum');
 Route::get('jurnal-umum/cari', 'LaransiController@cariJurnalUmum');
 

@@ -85,6 +85,21 @@ class LaransiController extends Controller
         return redirect('jurnal-umum');
     }
 
+    public function editJurnalUmum($id)
+    {
+        $daftar_akun = Akun::pluck('nama_akun', 'id');
+        $jurnal = Jurnal::findOrFail($id);
+        return view('edit-jurnal-umum', compact('jurnal', 'daftar_akun'));   
+    }
+
+    public function updateJurnalUmum(JurnalRequest $request, $id)
+    {
+        $jurnal = Jurnal::findOrFail($id);
+        $jurnal->update($request->all());
+        Session::flash('pesan', 'Transaksi Berhasil Diupdate');
+        return redirect('jurnal-umum');
+    }
+
     public function destroyJurnalUmum($id)
     {
         Jurnal::destroy($id);
@@ -341,6 +356,13 @@ class LaransiController extends Controller
         $pdf->Cell(121, 10, strtoupper(terbilang($total_kredit)).' RUPIAH', 1, 0, 'C');
         $pdf->Ln();
 
+        // Footer
+        $pdf->SetY(179);
+        $pdf->SetX(175);
+        $pdf->SetFont('Arial','I',8);
+        $pdf->Cell(0,10,"Dicetak Oleh Akuntan : ". $profil->nama_perusahaan ." Pada ".date("d-m-Y H:i:s")
+        ." WITA",0,0,'C');
+
         $pdf->AddPage('L', 'A4');
 
         // Buku Besar
@@ -409,6 +431,12 @@ class LaransiController extends Controller
             $pdf->Cell(226, 10, strtoupper( terbilang((substr($data[$i]['akun']->kode_akun, 0, 1) === '1' ||  substr($data[$i]['akun']->kode_akun, 0, 1) === '4') ? $data[$i]['jumlah_debet'] - $data[$i]['jumlah_kredit'] : (((substr($data[$i]['akun']->kode_akun, 0, 1) === '2' || substr($data[$i]['akun']->kode_akun, 0, 1) === '3') || substr($data[$i]['akun']->kode_akun, 0, 1) === '5') ? $data[$i]['jumlah_kredit'] - $data[$i]['jumlah_debet'] : "0"))) . "RUPIAH", 1, 0, 'C');
             $pdf->Ln();
 
+            // Footer
+            $pdf->SetY(179);
+            $pdf->SetX(175);
+            $pdf->SetFont('Arial','I',8);
+            $pdf->Cell(0,10,"Dicetak Oleh Akuntan : ". $profil->nama_perusahaan ." Pada ".date("d-m-Y H:i:s")." WITA",0,0,'C');
+
             $pdf->AddPage('L', 'A4');
         }
 
@@ -427,14 +455,24 @@ class LaransiController extends Controller
         $periode = date('F Y', strtotime($waktu));
         $periode = strtoupper($periode);
 
-        $total_akun = Akun::all()->count();
-        
+        $profil = Profil::findOrFail(1);
+
+        // $total_akun = Akun::all()->count();
+        $id = Akun::pluck('id');
+
         $total_saldo_debet = 0;
         $total_saldo_kredit = 0;
         
 
         $pdf->AddPage('L', 'A4');
         
+        // Header
+        $pdf->SetFont('Arial', 'B', 18);
+        $pdf->Cell(0, 10, $profil->nama_perusahaan, 0, 2, 'C');
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, "Alamat : ".$profil->alamat_perusahaan." | Telepon : ".$profil->telepon." | Email : ".$profil->email, 'B', 2, 'C');
+        $pdf->Ln();
+
         // Neraca Saldo
         $pdf->SetFont('Arial', 'B', 14);
         $pdf->Cell(0, 10, "NERACA SALDO $periode", 0, 2, 'C');
@@ -446,7 +484,8 @@ class LaransiController extends Controller
         $pdf->Cell(84, 10, "KREDIT", 1, 0, 'C');
         $pdf->Ln();
 
-        for($i = 1; $i <= $total_akun; $i++){
+        // for($i = 1; $i <= $total_akun; $i++){
+        foreach($id as $i){
 
             $daftar_buku[$i] = Jurnal::whereMonth('waktu_transaksi', $bulan)->whereYear('waktu_transaksi', $tahun)->orderBy('waktu_transaksi', 'asc')->where('id_akun', $i)->get();
             
@@ -494,6 +533,13 @@ class LaransiController extends Controller
         $pdf->Cell(123, 10, strtoupper(terbilang($total_saldo_debet)). "RUPIAH", 1, 0, 'C');
         $pdf->Cell(123, 10, strtoupper(terbilang($total_saldo_kredit)) . "RUPIAH", 1, 0, 'C');
         $pdf->Ln();
+
+        // Footer
+        $pdf->SetY(179);
+        $pdf->SetX(175);
+        $pdf->SetFont('Arial','I',8);
+        $pdf->Cell(0,10,"Dicetak Oleh Akuntan : ". $profil->nama_perusahaan ." Pada ".date("d-m-Y H:i:s")
+        ." WITA", 0, 0, 'C');
 
         Session::flash('pesan', 'Laporan Neraca Berhasil Diunduh');
         return $pdf->Output('D', "LAPORAN NERACA $periode.pdf");

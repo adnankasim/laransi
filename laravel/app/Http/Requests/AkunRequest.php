@@ -24,7 +24,7 @@ class AkunRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_akun' => 'required|string|max:100',
+            'nama_akun' => 'required|string|unique:akun|max:100',
             'kode_akun' => 'required|string|max:5',
         ];
     }

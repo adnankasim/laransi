@@ -43,9 +43,10 @@
                             @endif
                             </td>
                             <td>
+                            <a href="{{ url('jurnal-umum/'.$data->id.'/edit') }}" class="btn btn-info">EDIT</a>
                               {!! Form::open(['url' => 'jurnal-umum/'.$data->id, 'method' => 'delete', 'class' => 'form', 'style' => 'display:inline-block']) !!}
                                     {!! Form::submit('Hapus', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                              {!! Form::close() !!}
                             </td>
                           </tr>
                         @endforeach
