@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LARANSI - SISTEM INFORMASI AKUNTANSI BERBASIS LARAVEL</title>
+    
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
+
 	<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet">
