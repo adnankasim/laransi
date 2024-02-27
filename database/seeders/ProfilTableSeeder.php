@@ -15,9 +15,11 @@ class ProfilTableSeeder extends Seeder
     public function run()
     {
         $profil = [
-            'nama_perusahaan' => 'PT. SATYA TEKNOLOGI INDONESIA', 'tanggal_berdiri' => '2018-03-21',
-            'telepon' => '082293427693', 'alamat_perusahaan' => 'Jl. Sepanjang Jalan Kenangan',
-            'email' => 'satyateknologiindonesia@gmail.com'
+            'nama_perusahaan' => 'PT. ABADI SINGAPAY INDONESIA', 
+            'tanggal_berdiri' => '2023-07-01',
+            'telepon' => '+62 21389 29036', 
+            'alamat_perusahaan' => 'BSD Foresta 5 Unit 30, Tangerang Kabupaten',
+            'email' => 'info@singapay.id'
         ];
 
         DB::table('profil')->insert($profil);
